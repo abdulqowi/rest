@@ -1,11 +1,12 @@
 package com.rest.controller;
 
 import com.rest.dto.SampleServiceRs;
-import com.rest.dto.request.SampleServiceRequest;
+import com.rest.dto.SampleServiceRequest;
 import com.rest.dto.SampleServiceResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +17,11 @@ public class SampleServiceController {
 
     @PostMapping
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Berhasil"),
-            @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+            @ApiResponse(responseCode = "200", description = "Berhasil")
     })
     public ResponseEntity<SampleServiceResponse> processSampleService(
-            @RequestBody SampleServiceRequest request) {
+            @Valid @RequestBody SampleServiceRequest request) {
 
-        // Create response
         SampleServiceRs responseData =
                 SampleServiceRs.builder()
                         .errorCode("0000")
